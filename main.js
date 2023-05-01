@@ -25,21 +25,21 @@ function draw(){
 
     // }
     image(bgpic,0,0,displayWidth,displayHeight);
-    image(anglerimage,displayWidth*0.5, displayHeight*0.3, anglerimage.width*0.8, anglerimage.height*0.8);
-    image(gfb,displayWidth*0.8, displayHeight*0.05,gfb.width*0.12,gfb.height*0.12);
+    image(anglerimage,displayWidth*0.55, displayHeight*0.3, anglerimage.width*0.8, anglerimage.height*0.8);
+    image(gfb,displayWidth*0.85, displayHeight*0.05,gfb.width*0.12,gfb.height*0.12);
     image(fishimage,displayWidth*0.05,0, fishimage.width*0.4, fishimage.height*0.4);
     
-    image(eel1, displayWidth*0.05, displayHeight*0.7, eel1.width*0.4,eel1.height*0.4);
-    image(eel2, displayWidth*0.15-10, displayHeight*0.7, eel2.width*0.4,eel2.height*0.4);
-    image(eel3, displayWidth*0.25, displayHeight*0.7+10, eel3.width*0.4,eel3.height*0.4);
-    image(eel4, displayWidth*0.35 -30, displayHeight*0.7, eel4.width*0.4,eel4.height*0.4);
+    image(eel1, displayWidth*0.05, displayHeight*0.8, eel1.width*0.4,eel1.height*0.4);
+    image(eel2, displayWidth*0.15-10, displayHeight*0.8, eel2.width*0.4,eel2.height*0.4);
+    image(eel3, displayWidth*0.25, displayHeight*0.8+10, eel3.width*0.4,eel3.height*0.4);
+    image(eel4, displayWidth*0.35 -30, displayHeight*0.8, eel4.width*0.4,eel4.height*0.4);
 
     fill(255);
     
-    text("Outside Temperature",displayWidth*0.1, displayHeight*0.7);
-    text("Inside Temperature",displayWidth*0.2, displayHeight*0.7);
-    text("Outside Humidity",displayWidth*0.3, displayHeight*0.7);
-    text("Inside Humidity",displayWidth*0.4, displayHeight*0.7);
+    text("Outside Temperature",displayWidth*0.1, displayHeight*0.8);
+    text("Inside Temperature",displayWidth*0.2, displayHeight*0.8);
+    text("Outside Humidity",displayWidth*0.3, displayHeight*0.8);
+    text("Inside Humidity",displayWidth*0.4, displayHeight*0.8);
 
 
     
