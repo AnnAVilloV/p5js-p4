@@ -2,7 +2,7 @@ let port;
 let connectBtn;
 let textData = [];
 let currentText = "";
-
+let testImage;
 
 
 
@@ -10,7 +10,11 @@ function setup() {
   createCanvas(400, 400);
   background(220);
 
-// db fetch part
+  testImage = loadImage("assets/key.png");
+  bgpic = loadImage("assets/background.png");
+
+
+// text post part setup
   let input = createInput('');
   input.position(30, 30);
   input.size(300);
@@ -21,13 +25,10 @@ function setup() {
   button.id('submit-button');
   button.attribute('disabled', 'true');
 
-
-
-//microbit connect part
-  port = createSerial();
-
+//microbit connect part set up
   // in setup, we can open ports we have used previously
   // without user interaction
+  port = createSerial();
 
   let usedPorts = usedSerialPorts();
   if (usedPorts.length > 0) {
@@ -36,7 +37,6 @@ function setup() {
 
   // any other ports can be opened via a dialog after
   // user interaction (see connectBtnClick below)
-
   connectBtn = createButton('Connect to Micro:bit');
   connectBtn.position(80, 200);
   connectBtn.mousePressed(connectBtnClick);
@@ -46,9 +46,6 @@ function setup() {
   sendBtn.mousePressed(sendBtnClick);
 }
 
-
-
-
 function draw() {
   background(220);
   textData.forEach((el, i) => {
@@ -57,9 +54,13 @@ function draw() {
   text(el, 20, 80 + i * 20);
   });
 
+  // image(testImage,0,0,100,100);
+  // image(bgpic,100,100,100,100);
+  connectMicroDraw();
+}
 
 
-
+function connectMicroDraw(){
   // this makes received text scroll up
   copy(0, 0, width, height, 0, -1, width, height);
 
@@ -74,6 +75,7 @@ function draw() {
   // changes button label based on connection status
   if (!port.opened()) {
     connectBtn.html('Connect to Micro:bit');
+    // connectBtn.draw();
   } else {
     connectBtn.html('Disconnect');
   }

@@ -9,37 +9,11 @@
     <script src="https://unpkg.com/@gohai/p5.webserial@^1/libraries/p5.webserial.js"></script>
 
 
-    <!-- <script>
-        let textData = [];
-        let currentText = "";
 
-        function setup() {
-            createCanvas(400, 400);
-            background('grey');
-            let input = createInput('');
-            input.position(30, 30);
-            input.size(300);
-            input.id('text-field');
-            input.attribute('disabled', 'true');
-            let button = createButton('post');
-            button.position(350, 30);
-            button.id('submit-button');
-            button.attribute('disabled', 'true');
-        }
-
-        function draw() {
-            background(0);
-            textData.forEach((el, i) => {
-                fill(255);
-                textSize(10);
-                text(el, 20, 80 + i * 20);
-            });
-        }
-    </script> -->
 </head>
 
 <body>
-    <script type="module">
+    <!-- <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
         import { getAuth, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
         import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-functions.js";
@@ -77,8 +51,9 @@
                 console.error(token?.data?.reason ?? "unknownError")
             }
         })();
-    </script>
-    <script src="sketch.js"></script>
+    </script> -->
+    <!-- <script src="sketch.js"></script> -->
+    <script src="main.js"></script>
 </body>
 
 </html>
