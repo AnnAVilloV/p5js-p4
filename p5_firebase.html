@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <!-- <script type="module">
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
         import { getAuth, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
         import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-functions.js";
@@ -33,25 +33,45 @@
                     textData = Object.values(data ?? {}).map(el => el?.string?.toString() ?? '');
                     console.log(textData);
                 });
-
-                const inputField = document.getElementById('text-field');
-                const buttonField = document.getElementById('submit-button');
-                buttonField.addEventListener('click', () => {
-                    push(ref(database, "data"), {
-                        userId: user.uid,
-                        groupId: 20,
-                        timestamp: serverTimestamp(),
-                        type: "str",
-                        string: inputField.value.toString()
-                    });
+                onValue(query(ref(database, 'data'), orderByChild('groupId'), equalTo(1), limitToLast(1)), (snapshot) => {
+                    const data = snapshot.val();
+                    outTem = Object.values(data ?? {}).map(el => el?.integer?.toString() ?? '');
+                    console.log(outTem);
                 });
-                inputField.removeAttribute('disabled');
-                buttonField.removeAttribute('disabled');
+                onValue(query(ref(database, 'data'), orderByChild('groupId'), equalTo(2), limitToLast(1)), (snapshot) => {
+                    const data = snapshot.val();
+                    inTem = Object.values(data ?? {}).map(el => el?.integer?.toString() ?? '');
+                    console.log(inTem);
+                });
+                onValue(query(ref(database, 'data'), orderByChild('groupId'), equalTo(11), limitToLast(1)), (snapshot) => {
+                    const data = snapshot.val();
+                    outHumi = Object.values(data ?? {}).map(el => el?.integer?.toString() ?? '');
+                    console.log(outHumi);
+                });
+                onValue(query(ref(database, 'data'), orderByChild('groupId'), equalTo(12), limitToLast(1)), (snapshot) => {
+                    const data = snapshot.val();
+                    inHumi = Object.values(data ?? {}).map(el => el?.integer?.toString() ?? '');
+                    console.log(inHumi);
+                });
+
+                // const inputField = document.getElementById('text-field');
+                // const buttonField = document.getElementById('submit-button');
+                // buttonField.addEventListener('click', () => {
+                //     push(ref(database, "data"), {
+                //         userId: user.uid,
+                //         groupId: 20,
+                //         timestamp: serverTimestamp(),
+                //         type: "str",
+                //         string: inputField.value.toString()
+                //     });
+                // });
+                // inputField.removeAttribute('disabled');
+                // buttonField.removeAttribute('disabled');
             } else {
                 console.error(token?.data?.reason ?? "unknownError")
             }
         })();
-    </script> -->
+    </script>
     <!-- <script src="sketch.js"></script> -->
     <script src="main.js"></script>
 </body>
