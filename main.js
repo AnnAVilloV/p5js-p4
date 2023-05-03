@@ -8,6 +8,10 @@ let eel3;
 let eel4;
 let bubble;
 
+let gr, wr;
+let rabbit;
+let greytouch,whitetouch;
+
 let connectBtn;
 let port;
 
@@ -17,10 +21,21 @@ let inTem = [];
 let outHumi = [];
 let inHumi = [];
 
+let hue;
+let sat;
+let bri;
+
+let hueInt;let satInt;let briInt;
+
+let temp;
+
+
+
 function setup(){
     // createCanvas(400, 400);
     setupPic();
     setupMicro();
+    temp = displayWidth*0.5;
 }
 
 function draw(){
@@ -29,14 +44,37 @@ function draw(){
         drawPic();
         drawMicro();
         textData.forEach((el, i) => {
-            
-            image(bubble,displayWidth*0.35+displayWidth*0.1*i, displayHeight*0.25-displayHeight*0.13*i, bubble.width*0.03*el.length,bubble.height*0.4);
+            let bwidth = bubble.width*0.015*el.length;
+            image(bubble,displayWidth*0.33+displayWidth*0.1*i, displayHeight*0.25-displayHeight*0.13*i, bwidth,bubble.height*0.4);
             fill(255);
             textSize(bubble.height*0.04);
-            text(el, displayWidth*0.35+displayWidth*0.1*i+bubble.width*0.01*el.length, displayHeight*0.25-displayHeight*0.13*i+bubble.height*0.2);
+            text(el, displayWidth*0.35+displayWidth*0.1*i+bwidth*0.2, displayHeight*0.25-displayHeight*0.13*i+bubble.height*0.2);
             });
+        hueF = parseFloat(hue);
+        satInt = int(sat);
+        briInt = int(bri);
+        drawLight();
 
+        if(greytouch == 1){
+            drawRabbit(1);
+        }else if(whitetouch == 1){
+            drawRabbit(2);
+        }
 
+}
+
+function drawLight(){
+    // image(anglerimage,displayWidth*0.55, displayHeight*0.3, anglerimage.width*0.8, anglerimage.height*0.8);
+    colorMode(HSB, 360, 100, 100);
+ 
+    noStroke();
+    if(hue != null){
+        fill(hueF, satInt, briInt);
+        // fill(140,28,77);
+        circle(displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31, 90);
+    }
+    // fill(0);
+    // text(hue, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
 }
 
 function setupMicro(){
@@ -103,6 +141,10 @@ function setupPic(){
     eel4 = loadImage("assets/eel4.png");
 
     bubble = loadImage("assets/bubble.png")
+
+    wr = loadImage("assets/white.png");
+    gr = loadImage("assets/grey.png");
+    
 }
 
 function drawPic(){
@@ -153,4 +195,12 @@ function drawPic(){
     text(inHumi,displayWidth*0.36, displayHeight*0.83-h4);
 
 
+}
+
+function drawRabbit(num){
+    rabbit = gr;
+    if(num == 2){
+        rabbit = wr
+    }
+    image(rabbit,temp,displayHeight*0.6,rabbit.width*0.5, rabbit.height*0.5);
 }
