@@ -1,3 +1,5 @@
+
+
 let fishimage;
 let anglerimage;
 let bgpic;
@@ -21,17 +23,25 @@ let inTem = [];
 let outHumi = [];
 let inHumi = [];
 
-let hue;
+let hue,newhue;
 let sat;
 let bri;
 
-let hueInt;let satInt;let briInt;
+let hueF;let satInt;let briInt;
 
 let temp;
 
+let avalid = false;
+let bvalid = false;
+let svalid = false;
 
 
 function setup(){
+              createCanvas(400,400);
+            let button = createButton('setColor');
+            button.position(350,30);
+            button.id('submit-button');
+            button.attribute('disabled','true');
     // createCanvas(400, 400);
     setupPic();
     setupMicro();
@@ -44,12 +54,18 @@ function draw(){
         drawPic();
         drawMicro();
         textData.forEach((el, i) => {
-            let bwidth = bubble.width*0.015*el.length;
-            image(bubble,displayWidth*0.33+displayWidth*0.1*i, displayHeight*0.25-displayHeight*0.13*i, bwidth,bubble.height*0.4);
+            let bwidth = bubble.width*0.013*el.length;
+            let bheight = bubble.height*0.4;
+            let bpositonX = displayWidth*0.35+displayWidth*0.13*i;
+            let bpositionY = displayHeight*0.25-displayHeight*0.13*i;
             fill(255);
             textSize(bubble.height*0.04);
-            text(el, displayWidth*0.35+displayWidth*0.1*i+bwidth*0.2, displayHeight*0.25-displayHeight*0.13*i+bubble.height*0.2);
-            });
+            image(bubble,bpositonX, bpositionY, bwidth,bheight);
+            text(el, bpositonX + bwidth*0.05,bpositionY+bheight*0.5);
+
+
+          });
+          
         hueF = parseFloat(hue);
         satInt = int(sat);
         briInt = int(bri);
@@ -65,7 +81,7 @@ function draw(){
 
 function drawLight(){
     // image(anglerimage,displayWidth*0.55, displayHeight*0.3, anglerimage.width*0.8, anglerimage.height*0.8);
-    colorMode(HSB, 360, 100, 100);
+    colorMode(HSB);
  
     noStroke();
     if(hue != null){
@@ -73,8 +89,8 @@ function drawLight(){
         // fill(140,28,77);
         circle(displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31, 90);
     }
-    // fill(0);
-    // text(hue, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
+    fill(255);
+    // text(hue+" "+sat+" "+bri, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
 }
 
 function setupMicro(){
@@ -108,18 +124,61 @@ function connectBtnClick() {
   }  
 
 function drawMicro(){
-    // this makes received text scroll up
-    // copy(0, 0, width, height, 0, -1, width, height);
-  
-    // reads in complete lines and prints them at the
-    // bottom of the canvas
     let str = port.readUntil("\n");
     if (str.length > 0) {
-      // text(str, 10, height-20);
-      fill(255);
-      text('here is text', 300,300);
+      if(str.charAt(0) == "a"){
+          avalid = !avalid;
+          console.log("a is pressed");
+      }else if(str.charAt(0) == "b"){
+          bvalid = !bvalid;
+          console.log("b is pressed");
+      }else{
+          svalid = true;
+          console.log("shake !");
+      }
     }
-  
+    // fill(255);
+    // textSize(20);
+    if(avalid){
+      image(wr, displayWidth*random(0,1), displayHeight*random(0,1), wr.width*0.3,wr.height*0.3);
+    }
+    if(bvalid){
+      image(gr, displayWidth*random(0,1), displayHeight*random(0,1), wr.width*0.3,wr.height*0.3);
+    }
+    if(svalid){
+      text("shaked !!!", displayWidth*0.5,displayHeight*0.6);
+      newhue = int(random(0,360));
+      svalid = !svalid;
+    }
+    fill(255);
+    text(newhue, displayWidth*0.5,displayHeight*0.6);
+      // if(svalid){
+      //     push(ref(database, "data"), {
+      //     userId: user.uid,
+      //     groupId: 21,
+      //     timestamp: serverTimestamp(),
+      //     type: "int",
+      //     integer: newhue
+      // });
+      //     push(ref(database, "data"), {
+      //     userId: user.uid,
+      //     groupId: 22,
+      //     timestamp: serverTimestamp(),
+      //     type: "int",
+      //     integer: 50
+      // });
+      //     push(ref(database, "data"), {
+      //     userId: user.uid,
+      //     groupId: 23,
+      //     timestamp: serverTimestamp(),
+      //     type: "int",
+      //     integer: 50
+      // });
+      // fill(255);
+      // textSize(50);
+      // text("cnmlgb",100,100);
+      // svalid = !svalid
+      // }
     // changes button label based on connection status
     if (!port.opened()) {
       connectBtn.html('Connect to Micro:bit');
@@ -127,6 +186,7 @@ function drawMicro(){
     } else {
       connectBtn.html('Disconnect');
     }
+    
   }
 
 function setupPic(){

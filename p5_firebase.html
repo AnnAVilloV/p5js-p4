@@ -82,26 +82,27 @@
                     console.log("white touch"+whitetouch);
                 });
 
-                // const inputField = document.getElementById('text-field');
-                // const buttonField = document.getElementById('submit-button');
-                // buttonField.addEventListener('click', () => {
-                //     push(ref(database, "data"), {
-                //         userId: user.uid,
-                //         groupId: 20,
-                //         timestamp: serverTimestamp(),
-                //         type: "str",
-                //         string: inputField.value.toString()
-                //     });
-                // });
-                // inputField.removeAttribute('disabled');
-                // buttonField.removeAttribute('disabled');
+                const buttonField = document.getElementById('submit-button');
+                buttonField.addEventListener('click', () => {
+                    push(ref(database, "data"), {
+                        userId: user.uid,
+                        groupId: 21,
+                        timestamp: serverTimestamp(),
+                        type: "int",
+                        integer: newhue
+                    });
+                });
+       
+                buttonField.removeAttribute('disabled');
+
+
             } else {
                 console.error(token?.data?.reason ?? "unknownError")
             }
         })();
     </script>
     <!-- <script src="sketch.js"></script> -->
-    <script src="main.js"></script>
+    <script  src="main.js"></script>
 </body>
 
 </html>
