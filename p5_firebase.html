@@ -19,7 +19,7 @@
         import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-functions.js";
         import { getDatabase, serverTimestamp, push, ref, onValue, query, orderByChild, equalTo, limitToLast } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
 
-        import { firebaseToken, auth, database, functions } from './FirebaseP5.js';   
+        import { firebaseToken, auth, database, functions } from './FirebaseP5.js';
 
         (async () => {
             const getToken = httpsCallable(functions, "getToken");
@@ -74,26 +74,33 @@
                 onValue(query(ref(database, 'data'), orderByChild('groupId'), equalTo(8), limitToLast(1)), (snapshot) => {
                     const data = snapshot.val();
                     greytouch = Object.values(data ?? {}).map(el => el?.integer?.toString() ?? '');
-                    console.log("grey touch"+greytouch);
+                    console.log("grey touch" + greytouch);
                 });
                 onValue(query(ref(database, 'data'), orderByChild('groupId'), equalTo(9), limitToLast(1)), (snapshot) => {
                     const data = snapshot.val();
                     whitetouch = Object.values(data ?? {}).map(el => el?.integer?.toString() ?? '');
-                    console.log("white touch"+whitetouch);
+                    console.log("white touch" + whitetouch);
                 });
 
-                const buttonField = document.getElementById('submit-button');
-                buttonField.addEventListener('click', () => {
-                    push(ref(database, "data"), {
-                        userId: user.uid,
-                        groupId: 21,
-                        timestamp: serverTimestamp(),
-                        type: "int",
-                        integer: newhue
-                    });
-                });
-       
-                buttonField.removeAttribute('disabled');
+                // const buttonField = document.getElementById('submit-button');
+                // buttonField.addEventListener('click', () => {
+                setInterval(() => {
+                    if (svalid) {
+                        console.log("hue")
+                        push(ref(database, "data"), {
+                            userId: user.uid,
+                            groupId: 21,
+                            timestamp: serverTimestamp(),
+                            type: "int",
+                            integer: newhue
+                        });
+                        svalid = !svalid;
+                    }
+
+                }, 1000);
+                // });
+
+                // buttonField.removeAttribute('disabled');
 
 
             } else {
@@ -102,7 +109,7 @@
         })();
     </script>
     <!-- <script src="sketch.js"></script> -->
-    <script  src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

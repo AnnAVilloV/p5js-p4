@@ -38,10 +38,10 @@ let svalid = false;
 
 function setup(){
               createCanvas(400,400);
-            let button = createButton('setColor');
-            button.position(350,30);
-            button.id('submit-button');
-            button.attribute('disabled','true');
+            // let button = createButton('setColor');
+            // button.position(350,30);
+            // button.id('submit-button');
+            // button.attribute('disabled','true');
     // createCanvas(400, 400);
     setupPic();
     setupMicro();
@@ -81,7 +81,7 @@ function draw(){
 
 function drawLight(){
     // image(anglerimage,displayWidth*0.55, displayHeight*0.3, anglerimage.width*0.8, anglerimage.height*0.8);
-    colorMode(HSB);
+    colorMode(HSL);
  
     noStroke();
     if(hue != null){
@@ -90,7 +90,7 @@ function drawLight(){
         circle(displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31, 90);
     }
     fill(255);
-    // text(hue+" "+sat+" "+bri, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
+    text(hue+" "+sat+" "+bri, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
 }
 
 function setupMicro(){
@@ -148,7 +148,7 @@ function drawMicro(){
     if(svalid){
       text("shaked !!!", displayWidth*0.5,displayHeight*0.6);
       newhue = int(random(0,360));
-      svalid = !svalid;
+      // svalid = !svalid;
     }
     fill(255);
     text(newhue, displayWidth*0.5,displayHeight*0.6);
