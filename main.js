@@ -90,7 +90,7 @@ function drawLight(){
         circle(displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31, 90);
     }
     fill(255);
-    text(hue+" "+sat+" "+bri, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
+    // text(hue+" "+sat+" "+bri, displayWidth*0.55+anglerimage.width*0.09, displayHeight*0.3+anglerimage.height*0.31);
 }
 
 function setupMicro(){
